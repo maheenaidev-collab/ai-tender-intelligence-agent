@@ -1,0 +1,20 @@
+import requests
+from bs4 import BeautifulSoup
+
+def scrape_tenders(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    tenders = []
+
+    for item in soup.select("a"):
+        title = item.text.strip()
+        link = item.get("href")
+
+        if title:
+            tenders.append({
+                "title": title,
+                "link": link
+            })
+
+    return tenders
