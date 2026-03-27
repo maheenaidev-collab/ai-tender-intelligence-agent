@@ -1,0 +1,11 @@
+from scraper.scraper import scrape_tenders
+from ai.analyzer import analyze_document
+
+URL = "https://example.com/tenders"
+
+tenders = scrape_tenders(URL)
+
+for tender in tenders[:5]:
+    print("Title:", tender["title"])
+    print("Link:", tender["link"])
+    print()
