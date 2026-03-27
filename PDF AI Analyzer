@@ -1,0 +1,35 @@
+import pdfplumber
+from openai import OpenAI
+
+client = OpenAI()
+
+def extract_text(pdf_path):
+    text = ""
+
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text()
+
+    return text
+
+
+def analyze_document(text):
+
+    prompt = f"""
+    Analyze this tender document and summarize:
+
+    - Key requirements
+    - Financial conditions
+    - Experience needed
+    - Eligibility summary
+
+    Document:
+    {text[:3000]}
+    """
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role":"user","content":prompt}]
+    )
+
+    return response.choices[0].message.content
