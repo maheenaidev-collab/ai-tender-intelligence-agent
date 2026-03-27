@@ -1,0 +1,15 @@
+ai-tender-intelligence-agent
+│
+├── scraper
+│   └── scraper.py
+│
+├── ai
+│   └── analyzer.py
+│
+├── data
+│
+├── reports
+│
+├── main.py
+├── requirements.txt
+└── README.md
